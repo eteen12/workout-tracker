@@ -27,17 +27,16 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider >
       <html lang="en">
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col items-center px-8`}
         >
-          <header className="flex justify-between">
-            <h1>PROTracker</h1>
-            <UserButton showName />
+          <header className="mr-auto absolute top-2 left-0 ml-3">
+            <UserButton />
           </header>
-          <SignedOut>
-            <SignIn routing="hash" />
+          <SignedOut >
+            <SignIn routing="hash"  />
           </SignedOut>
           <SignedIn>{children}</SignedIn>
         </body>

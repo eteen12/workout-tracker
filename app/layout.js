@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
     <ClerkProvider>
       <html lang="en">
         <body className={`${inter.variable} antialiased`}>
-          <div className=" w-full h-20 bg">
+          <div className=" w-full h-20 bg-zinc-900">
             <header className="absolute left-0 top-7 ml-5 mr-auto opacity-100">
               <UserButton />
             </header>

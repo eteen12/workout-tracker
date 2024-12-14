@@ -1,23 +1,47 @@
 "use client"
+import { ChevronRightIcon } from "@heroicons/react/20/solid"
+import { IoIosList } from "react-icons/io"
+import { IoAdd } from "react-icons/io5"
 
-const plans = [
+const people = [
   {
-    id: 1,
-    name: "Hobby",
-    memory: "4 GB RAM",
-    cpu: "4 CPUs",
-    storage: "128 GB SSD disk",
-    price: "$40",
-    isCurrent: false,
+    name: "Leslie Alexander",
+    email: "",
+    role: "Co-Founder / CEO",
+    imageUrl:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    href: "#",
+    lastSeen: "3h ago",
+    lastSeenDateTime: "2023-01-23T13:23Z",
   },
   {
-    id: 2,
-    name: "Startup",
-    memory: "8 GB RAM",
-    cpu: "6 CPUs",
-    storage: "256 GB SSD disk",
-    price: "$80",
-    isCurrent: true,
+    name: "Michael Foster",
+    email: "",
+    role: "Co-Founder / CTO",
+    imageUrl:
+      "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    href: "#",
+    lastSeen: "3h ago",
+    lastSeenDateTime: "2023-01-23T13:23Z",
+  },
+  {
+    name: "Dries Vincent",
+    email: "",
+    role: "Business Relations",
+    imageUrl:
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    href: "#",
+    lastSeen: null,
+  },
+  {
+    name: "Lindsay Walton",
+    email: "lindsay.walton@example.com",
+    role: "Front-end Developer",
+    imageUrl:
+      "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    href: "#",
+    lastSeen: "3h ago",
+    lastSeenDateTime: "2023-01-23T13:23Z",
   },
 ]
 
@@ -27,147 +51,76 @@ function classNames(...classes) {
 
 export default function Hero() {
   return (
-    <div className="py-24">
-      <div className="sm:flex sm:items-center">
-        <div className="sm:flex-auto">
-          <h1 className="text-base font-semibold text-gray-900">Plans</h1>
-          <p className="mt-2 text-sm text-gray-700">
-            Your team is on the{" "}
-            <strong className="font-semibold text-gray-900">Startup</strong>{" "}
-            plan. The next payment of $80 will be due on August 4, 2022.
-          </p>
-        </div>
-        <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-          <button
-            type="button"
-            className="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
-            Update credit card
+    <div className="flex flex-col">
+      <div className="px-4">
+        <h1 className="mb-1 text-xl text-slate-200">Routines</h1>
+      </div>
+      <ul
+        role="list"
+        className="bg divide-y divide-neutral-800 overflow-hidden rounded-xl shadow-sm ring-1 ring-gray-900/5"
+      >
+        {/*ADD NEW ROUTINE BUTTON*/}
+        <li className="relative flex gap-x-4 px-4 py-2 hover:bg-gray-50 sm:px-6">
+          <button>
+            <IoAdd className="text-3xl text-blue-600" />
           </button>
-        </div>
-      </div>
-      <div className="-mx-4 mt-10 ring-1 ring-gray-300 sm:mx-0 sm:rounded-lg">
-        <table className="min-w-full divide-y divide-gray-300">
-          <thead>
-            <tr>
-              <th
-                scope="col"
-                className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-              >
-                Plan
-              </th>
-              <th
-                scope="col"
-                className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell"
-              >
-                Memory
-              </th>
-              <th
-                scope="col"
-                className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell"
-              >
-                CPU
-              </th>
-              <th
-                scope="col"
-                className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell"
-              >
-                Storage
-              </th>
-              <th
-                scope="col"
-                className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-              >
-                Price
-              </th>
-              <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                <span className="sr-only">Select</span>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {plans.map((plan, planIdx) => (
-              <tr key={plan.id}>
-                <td
-                  className={classNames(
-                    planIdx === 0 ? "" : "border-t border-transparent",
-                    "relative py-4 pl-4 pr-3 text-sm sm:pl-6",
-                  )}
-                >
-                  <div className="font-medium text-gray-900">
-                    {plan.name}
-                    {plan.isCurrent ? (
-                      <span className="ml-1 text-indigo-600">
-                        (Current Plan)
-                      </span>
-                    ) : null}
-                  </div>
-                  <div className="mt-1 flex flex-col text-gray-500 sm:block lg:hidden">
-                    <span>
-                      {plan.memory} / {plan.cpu}
-                    </span>
-                    <span className="hidden sm:inline">·</span>
-                    <span>{plan.storage}</span>
-                  </div>
-                  {planIdx !== 0 ? (
-                    <div className="absolute -top-px left-6 right-0 h-px bg-gray-200" />
-                  ) : null}
-                </td>
-                <td
-                  className={classNames(
-                    planIdx === 0 ? "" : "border-t border-gray-200",
-                    "hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell",
-                  )}
-                >
-                  {plan.memory}
-                </td>
-                <td
-                  className={classNames(
-                    planIdx === 0 ? "" : "border-t border-gray-200",
-                    "hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell",
-                  )}
-                >
-                  {plan.cpu}
-                </td>
-                <td
-                  className={classNames(
-                    planIdx === 0 ? "" : "border-t border-gray-200",
-                    "hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell",
-                  )}
-                >
-                  {plan.storage}
-                </td>
-                <td
-                  className={classNames(
-                    planIdx === 0 ? "" : "border-t border-gray-200",
-                    "px-3 py-3.5 text-sm text-gray-500",
-                  )}
-                >
-                  <div className="sm:hidden">{plan.price}/mo</div>
-                  <div className="hidden sm:block">{plan.price}/month</div>
-                </td>
-                <td
-                  className={classNames(
-                    planIdx === 0 ? "" : "border-t border-transparent",
-                    "relative py-3.5 pl-3 pr-4 text-right text-sm font-medium sm:pr-6",
-                  )}
-                >
-                  <button
-                    type="button"
-                    disabled={plan.isCurrent}
-                    className="inline-flex items-center rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white"
+          <h2 className="text-blue-600">Add New Routine</h2>
+        </li>
+        {people.map((person) => (
+          <li
+            key={person.name}
+            className="relative flex justify-between gap-x-6 px-4 py-2 hover:bg-gray-50 sm:px-6"
+          >
+            <div className="flex min-w-0 gap-x-4">
+              <IoIosList className="size-8 flex-none text-blue-600" />
+
+              <div className="min-w-0 flex-auto">
+                <p className="text-sm/6 font-semibold text-slate-200">
+                  <a href={person.href}>
+                    <span className="absolute inset-x-0 -top-px bottom-0" />
+                    {person.name}
+                  </a>
+                </p>
+                <p className="mt-1 flex text-xs/5 text-gray-400">
+                  <a
+                    href={`mailto:${person.email}`}
+                    className="relative truncate hover:underline"
                   >
-                    Select<span className="sr-only">, {plan.name}</span>
-                  </button>
-                  {planIdx !== 0 ? (
-                    <div className="absolute -top-px left-0 right-6 h-px bg-gray-200" />
-                  ) : null}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+                    {person.email}
+                  </a>
+                </p>
+              </div>
+            </div>
+            <div className="flex shrink-0 items-center gap-x-4">
+              <div className="hidden sm:flex sm:flex-col sm:items-end">
+                <p className="text-sm/6 text-slate-200">{person.role}</p>
+                {person.lastSeen ? (
+                  <p className="mt-1 text-xs/5 text-gray-400">
+                    Last seen{" "}
+                    <time dateTime={person.lastSeenDateTime}>
+                      {person.lastSeen}
+                    </time>
+                  </p>
+                ) : (
+                  <div className="mt-1 flex items-center gap-x-1.5">
+                    <div className="flex-none rounded-full bg-emerald-500/20 p-1">
+                      <div className="size-1.5 rounded-full bg-emerald-500" />
+                    </div>
+                    <p className="text-xs/5 text-gray-400">Online</p>
+                  </div>
+                )}
+              </div>
+              <div className="flex">
+                <p className="text-sm text-gray-400">1</p>
+                <ChevronRightIcon
+                  aria-hidden="true"
+                  className="size-5 flex-none text-gray-400"
+                />
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }

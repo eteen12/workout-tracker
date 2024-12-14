@@ -1,4 +1,4 @@
-import localFont from "next/font/local"
+import { Inter } from "next/font/google"
 import "./globals.css"
 import {
   ClerkProvider,
@@ -9,15 +9,10 @@ import {
   UserButton,
 } from "@clerk/nextjs"
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-})
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 })
 
 export const metadata = {
@@ -27,18 +22,22 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider >
+    <ClerkProvider>
       <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col items-center px-8`}
-        >
-          <header className="mr-auto absolute top-2 left-0 ml-3">
-            <UserButton />
-          </header>
-          <SignedOut >
-            <SignIn routing="hash"  />
-          </SignedOut>
-          <SignedIn>{children}</SignedIn>
+        <body className={`${inter.variable} antialiased`}>
+          <div className=" w-full h-20 bg">
+            <header className="absolute left-0 top-7 ml-5 mr-auto opacity-100">
+              <UserButton />
+            </header>
+          </div>
+          <div className="flex justify-center pt-16">
+            <SignedOut >
+              <SignIn routing="hash" />
+            </SignedOut>
+          </div>
+          <div className="px-5">
+            <SignedIn>{children}</SignedIn>
+          </div>
         </body>
       </html>
     </ClerkProvider>

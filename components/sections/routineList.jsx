@@ -1,25 +1,8 @@
-"use client"
-import { useEffect, useState } from "react"
-
 import { ChevronRightIcon } from "@heroicons/react/20/solid"
 import { IoIosList } from "react-icons/io"
 import AddRoutine from "./addRoutine"
 
-export default function Hero() {
-  const [routines, setRoutines] = useState([])
-
-  useEffect(() => {
-    const fetchRoutines = async () => {
-      try {
-        const response = await fetch(`/api/getroutines/`)
-        const data = await response.json()
-        setRoutines(data)
-      } catch (error) {
-        console.log("Error fetching routines", error)
-      }
-    }
-    fetchRoutines()
-  }, []) //the empty array means it runs once on component mount
+export default function RoutineList({ routines, addRoutine }) {
 
   return (
     <div className="flex flex-col">
@@ -30,7 +13,7 @@ export default function Hero() {
         role="list"
         className="bg divide-y divide-neutral-800 overflow-hidden rounded-xl shadow-sm ring-1 ring-gray-900/5"
       >
-        <AddRoutine />
+        <AddRoutine addRoutine={addRoutine} />
         {routines.map((routine) => (
           <li
             key={routine.category}

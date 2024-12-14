@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 import { IoAdd } from "react-icons/io5"
 import { IoIosList } from "react-icons/io"
 
-export default function AddRoutine() {
+export default function AddRoutine({addRoutine}) {
   {
     /*BUTTON STATES*/
   }
@@ -50,10 +50,11 @@ export default function AddRoutine() {
       if (!response.ok) {
         throw new Error("Failed, you reached throw new error")
       }
-      const data = await response.json()
+      const newRoutine = await response.json()
       setCategory("")
       setDescription("")
       setIsClicked(false)
+      addRoutine(newRoutine)
     } catch (error) {
       console.log(error)
       alert("Error submitting, you reached the catch clause")

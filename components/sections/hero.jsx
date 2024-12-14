@@ -1,26 +1,25 @@
 "use client"
 import { useEffect, useState } from "react"
-import { useUser } from "@clerk/nextjs"
 
 import { ChevronRightIcon } from "@heroicons/react/20/solid"
 import { IoIosList } from "react-icons/io"
-import { IoAdd } from "react-icons/io5"
 import AddRoutine from "./addRoutine"
 
-const routines = [
-  {
-    category: "BACK",
-    link: "#",
-    description: "asl",
-    workouts: "4",
-  },
-]
-
 export default function Hero() {
-  // const handleClick = (e) => {
-  //   e.preventDefault()
-  //   alert("HELLO!")
-  // }
+  const [routines, setRoutines] = useState([])
+
+  useEffect(() => {
+    const fetchRoutines = async () => {
+      try {
+        const response = await fetch(`/api/getroutines/`)
+        const data = await response.json()
+        setRoutines(data)
+      } catch (error) {
+        console.log("Error fetching routines", error)
+      }
+    }
+    fetchRoutines()
+  }, []) //the empty array means it runs once on component mount
 
   return (
     <div className="flex flex-col">
@@ -31,17 +30,10 @@ export default function Hero() {
         role="list"
         className="bg divide-y divide-neutral-800 overflow-hidden rounded-xl shadow-sm ring-1 ring-gray-900/5"
       >
-        {/*ADD NEW ROUTINE BUTTON*/}
-        {/* <li className="relative flex gap-x-4 px-4 py-2 sm:px-6">
-          <button onClick={handleClick} aria-label="add workout routine">
-            <IoAdd className="text-3xl text-blue-600" />
-          </button>
-          <h2 className="text-blue-600">Add New Routine</h2>
-        </li> */}
         <AddRoutine />
         {routines.map((routine) => (
           <li
-            key={routine.link}
+            key={routine.category}
             className="relative flex justify-between gap-x-6 px-4 py-2 sm:px-6"
           >
             <div className="flex min-w-0 gap-x-4">
@@ -49,7 +41,7 @@ export default function Hero() {
 
               <div className="min-w-0 flex-auto">
                 <p className="text-sm/6 font-semibold text-slate-200">
-                  <a href={routine.link}>
+                  <a href={routine.category}>
                     <span className="absolute inset-x-0 -top-px bottom-0" />
                     {routine.category}
                   </a>

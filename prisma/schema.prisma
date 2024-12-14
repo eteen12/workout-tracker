@@ -12,3 +12,12 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
+
+model Routine {
+  id          Int      @id @default(autoincrement())
+  userId      String
+  category    String
+  description String
+  workouts    Int
+  createdAt   DateTime @default(now())
+}

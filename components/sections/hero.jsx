@@ -1,7 +1,11 @@
 "use client"
+import { useEffect, useState } from "react"
+import { useUser } from "@clerk/nextjs"
+
 import { ChevronRightIcon } from "@heroicons/react/20/solid"
 import { IoIosList } from "react-icons/io"
 import { IoAdd } from "react-icons/io5"
+import AddRoutine from "./addRoutine"
 
 const routines = [
   {
@@ -12,11 +16,12 @@ const routines = [
   },
 ]
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ")
-}
-
 export default function Hero() {
+  // const handleClick = (e) => {
+  //   e.preventDefault()
+  //   alert("HELLO!")
+  // }
+
   return (
     <div className="flex flex-col">
       <div className="px-4">
@@ -27,16 +32,17 @@ export default function Hero() {
         className="bg divide-y divide-neutral-800 overflow-hidden rounded-xl shadow-sm ring-1 ring-gray-900/5"
       >
         {/*ADD NEW ROUTINE BUTTON*/}
-        <li className="relative flex gap-x-4 px-4 py-2 hover:bg-gray-50 sm:px-6">
-          <button>
+        {/* <li className="relative flex gap-x-4 px-4 py-2 sm:px-6">
+          <button onClick={handleClick} aria-label="add workout routine">
             <IoAdd className="text-3xl text-blue-600" />
           </button>
           <h2 className="text-blue-600">Add New Routine</h2>
-        </li>
+        </li> */}
+        <AddRoutine />
         {routines.map((routine) => (
           <li
             key={routine.link}
-            className="relative flex justify-between gap-x-6 px-4 py-2 hover:bg-gray-50 sm:px-6"
+            className="relative flex justify-between gap-x-6 px-4 py-2 sm:px-6"
           >
             <div className="flex min-w-0 gap-x-4">
               <IoIosList className="size-8 flex-none text-blue-600" />

@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 import { Inter } from "next/font/google"
 import "./globals.css"
 import {
@@ -25,13 +27,18 @@ export default function RootLayout({ children }) {
     <ClerkProvider>
       <html lang="en">
         <body className={`${inter.variable} antialiased`}>
-          <div className=" w-full h-20 bg-zinc-900">
+          <div className="h-20 w-full bg-zinc-900">
             <header className="absolute left-0 top-7 ml-5 mr-auto opacity-100">
-              <UserButton />
+              <div className="flex justify-between">
+                <UserButton />
+                <Link href="/">
+                  <p className="z-20 text-white">home</p>
+                </Link>
+              </div>
             </header>
           </div>
           <div className="flex justify-center pt-16">
-            <SignedOut >
+            <SignedOut>
               <SignIn routing="hash" />
             </SignedOut>
           </div>

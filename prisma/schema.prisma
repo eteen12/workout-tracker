@@ -14,9 +14,26 @@ datasource db {
 }
 
 model Routine {
-  id          Int      @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   category    String
   description String
-  createdAt   DateTime @default(now())
+  createdAt   DateTime  @default(now())
+  workouts    Workout[]
 }
 
+model Workout {
+  id        Int      @id @default(autoincrement())
+  Routine   Routine? @relation(fields: [routineId], references: [id])
+  name      String
+  routineId Int
+  sets      Set[]
+}
+
+model Set {
+  id        Int      @id @default(autoincrement())
+  Workout   Workout? @relation(fields: [workoutId], references: [id])
+  workoutId Int
+  weight    Float
+  reps      Int
+  date      DateTime @default(now())
+}

@@ -12,8 +12,11 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: var(--font-inter);
-  font-weight: 500;
+  font-weight: 400;
 }
 .bg {
   background-color: rgba(26, 28, 26, 0.9);
+}
+.transition3{
+  transition: all 0.3s ease-in-out;
 }

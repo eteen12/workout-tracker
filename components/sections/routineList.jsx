@@ -6,10 +6,27 @@ import AddRoutine from "./addRoutine"
 import SwipeToDelete from "react-swipe-to-delete-component"
 import "react-swipe-to-delete-component/dist/swipe-to-delete.css"
 
-export default function RoutineList({ routines, addRoutine }) {
+export default function RoutineList({ routines, addRoutine, setRoutines }) {
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch(`/api/deleteroutine`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id }),
+      })
 
-  const handleDelete = async (id) =>{
-    
+      if (!response.ok) {
+        throw new Error("Failed to delete the routine")
+      }
+
+      setRoutines((prevRoutines) =>
+        prevRoutines.filter((routine) => routine.id !== id),
+      )
+    } catch (error) {
+      console.log("Error deleting routine. Error on front end catch", error)
+    }
   }
   return (
     <div className="flex flex-col">
@@ -22,9 +39,12 @@ export default function RoutineList({ routines, addRoutine }) {
       >
         <AddRoutine addRoutine={addRoutine} />
         {routines.map((routine) => (
-          <SwipeToDelete key={routine.category} onDelete={() => handleDelete(routine.id)}>
+          <SwipeToDelete
+            key={routine.id}
+            onDelete={() => handleDelete(routine.id)}
+          >
             <li
-              key={routine.category}
+              key={routine.id}
               className="relative flex justify-between gap-x-6 bg-zinc-900 px-4 py-2 sm:px-6"
             >
               <div className="flex min-w-0 gap-x-4">

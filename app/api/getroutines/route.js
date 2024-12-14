@@ -6,6 +6,7 @@ export async function GET() {
       select: {
         category: true,
         description: true,
+        id: true,
       },
     })
     return new Response(JSON.stringify(routines), { status: 200 })

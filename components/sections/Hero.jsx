@@ -1,7 +1,6 @@
 "use client"
 import { useState, useEffect } from "react"
 
-import AddRoutine from "./addRoutine"
 import RoutineList from "./routineList"
 
 export default function Hero() {
@@ -26,7 +25,11 @@ export default function Hero() {
 
   return (
     <div>
-      <RoutineList routines={routines} addRoutine={addRoutine} />
+      <RoutineList
+        routines={routines}
+        addRoutine={addRoutine}
+        setRoutines={setRoutines}
+      />
     </div>
   )
 }

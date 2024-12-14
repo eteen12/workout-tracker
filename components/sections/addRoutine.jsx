@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 import { IoAdd } from "react-icons/io5"
 import { IoIosList } from "react-icons/io"
 
-export default function AddRoutine({addRoutine}) {
+export default function AddRoutine({ addRoutine }) {
   {
     /*BUTTON STATES*/
   }

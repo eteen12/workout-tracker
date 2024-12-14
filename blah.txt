@@ -15,8 +15,14 @@ datasource db {
 
 model Routine {
   id          Int      @id @default(autoincrement())
+  userId      String
   category    String
   description String
   createdAt   DateTime @default(now())
+  User        User     @relation(fields: [userId], references: [id])
 }
 
+model User {
+  id       String    @id @default(cuid())
+  routines Routine[]
+}

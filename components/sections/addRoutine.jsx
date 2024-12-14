@@ -1,12 +1,15 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useUser } from "@clerk/nextjs"
 
 import { IoAdd } from "react-icons/io5"
 import { IoIosList } from "react-icons/io"
 
 export default function AddRoutine() {
+  {
+    /*BUTTON STATES*/
+  }
+
   const [isClicked, setIsClicked] = useState(false)
 
   const handleClick = (e) => {
@@ -16,6 +19,45 @@ export default function AddRoutine() {
   const handleClose = (e) => {
     e.preventDefault()
     setIsClicked(false)
+  }
+
+  {
+    /*BACKEND ADDITION */
+  }
+  const [category, setCategory] = useState("")
+  const [description, setDescription] = useState("")
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    if (!category) {
+      alert("Please add a name for your routine before adding")
+      return
+    }
+
+    try {
+      const response = await fetch("/api/routines", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          category,
+          description,
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error("Failed, you reached throw new error")
+      }
+      const data = await response.json()
+      setCategory("")
+      setDescription("")
+      setIsClicked(false)
+    } catch (error) {
+      console.log(error)
+      alert("Error submitting, you reached the catch clause")
+    }
   }
 
   return (
@@ -40,7 +82,7 @@ export default function AddRoutine() {
 
           <div className="flex justify-between px-5 pt-4 text-lg text-blue-600">
             <button onClick={handleClose}>Cancel</button>
-            <button>Add</button>
+            <button onClick={handleSubmit}>Add</button>
           </div>
           {/*LIST IMAGE*/}
 
@@ -58,6 +100,8 @@ export default function AddRoutine() {
             </label>
             <div className="mt-2">
               <input
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
                 id="routine-name"
                 name="routine-name"
                 type="text"
@@ -84,6 +128,8 @@ export default function AddRoutine() {
             </label>
             <div className="mt-2">
               <input
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
                 id="routine-description"
                 name="routine-description"
                 type="text"

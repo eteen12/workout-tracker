@@ -1,11 +1,11 @@
+import Sets from "../../../components/sets/sets"
 
+export default async function Page({ params }) {
+  const { id } = await params
 
-export default function Page(){
-    return(
-        <div></div>
-    )
-
-    
+  return (
+    <div>
+      <Sets id={id} />
+    </div>
+  )
 }
-
-   

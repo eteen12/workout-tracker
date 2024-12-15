@@ -36,6 +36,22 @@ export default function Sets({ id }) {
     fetchSets()
   }, [id, refresh])
 
+  const handleDelete = async (set) => {
+    try {
+      const response = await fetch(`/api/delete-set`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ set }),
+      })
+      if (!response.ok) throw new Error("Failed to delete set")
+      setRefresh((prev) => !prev)
+    } catch (error) {
+      console.log("Cannot delete this set", error)
+    }
+  }
+
   return (
     <>
       <div className="flex flex-col">

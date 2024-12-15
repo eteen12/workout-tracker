@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 import { IoAdd } from "react-icons/io5"
 import { IoIosList } from "react-icons/io"
 
-export default function AddSet({ id }) {
+export default function AddSet({ id, onAdd }) {
   const [isClicked, setIsClicked] = useState(false)
   const [reps, setReps] = useState("")
   const [weight, setWeight] = useState("")
@@ -39,7 +39,7 @@ export default function AddSet({ id }) {
       setReps("")
       setWeight("")
       setIsClicked(false)
-      //   onAdd()
+      onAdd()
     } catch (error) {
       alert("Error submitting, you reached the catch clause")
     }

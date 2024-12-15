@@ -9,6 +9,7 @@ import AddSet from "./addSet"
 
 export default function Sets({ id }) {
   const [sets, setSets] = useState({})
+  const [refresh, setRefresh] = useState(false)
 
   useEffect(() => {
     const fetchSets = async () => {
@@ -33,7 +34,7 @@ export default function Sets({ id }) {
       }
     }
     fetchSets()
-  }, [id])
+  }, [id, refresh])
 
   return (
     <>
@@ -97,7 +98,7 @@ export default function Sets({ id }) {
           </div>
         ))}
       </div>
-      <AddSet id={id} />
+      <AddSet id={id} onAdd={() => setRefresh((prev) => !prev)} />
     </>
   )
 }

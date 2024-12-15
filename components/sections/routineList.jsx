@@ -62,7 +62,9 @@ export default function RoutineList({ routines, addRoutine, setRoutines }) {
                 </div>
                 <div className="flex shrink-0 items-center gap-x-4">
                   <div className="flex">
-                    <p className="text-sm text-gray-400">1</p>
+                    <p className="text-sm text-gray-400">
+                      {routine.workoutCount}
+                    </p>
                     <ChevronRightIcon
                       aria-hidden="true"
                       className="size-5 flex-none text-gray-400"

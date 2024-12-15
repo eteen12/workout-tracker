@@ -7,9 +7,20 @@ export async function GET() {
         category: true,
         description: true,
         id: true,
+        workouts: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
       },
     })
-    return new Response(JSON.stringify(routines), { status: 200 })
+    const routinesWithCount = routines.map((routine) => ({
+      ...routine,
+      workoutCount: routine.workouts.length,
+    }))
+
+    return new Response(JSON.stringify(routinesWithCount), { status: 200 })
   } catch (error) {
     console.log(error)
     return new Response("Error fetching routines", { status: 500 })

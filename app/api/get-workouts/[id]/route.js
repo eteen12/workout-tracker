@@ -1,14 +1,13 @@
 import prisma from "../../../../lib/prisma"
 
 export async function GET(req, { params }) {
-  const { id } = params // Assumes you're passing the ID in the URL
+  const { id } = params
 
   try {
     const routine = await prisma.routine.findUnique({
-      where: { id: Number(id) }, // Find a routine by ID
+      where: { id: Number(id) },
       select: {
         category: true,
-        description: true,
         workouts: {
           select: {
             id: true,
@@ -43,29 +42,3 @@ export async function GET(req, { params }) {
     )
   }
 }
-// export async function GET(req, { params }) {
-//     try {
-//       const dummyData = {
-//         workouts: [
-//           {
-//             id: 1,
-//             name: "Workout 1",
-//             sets: [{ id: 1, weight: 20, reps: 10 }],
-//           },
-//         ],
-//       }
-//       return new Response(JSON.stringify(dummyData), { status: 200 })
-//     } catch (error) {
-//       console.error("Error in API handler:", error)
-//       return new Response(
-//         JSON.stringify({
-//           error: "Internal server error",
-//           details: error.message,
-//         }),
-//         {
-//           status: 500,
-//           headers: { "Content-Type": "application/json" },
-//         },
-//       )
-//     }
-//   }

@@ -97,7 +97,7 @@ export default function Sets({ id }) {
           </div>
         ))}
       </div>
-      <AddSet />
+      <AddSet id={id} />
     </>
   )
 }

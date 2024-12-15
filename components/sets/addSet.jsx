@@ -7,7 +7,8 @@ import { IoIosList } from "react-icons/io"
 
 export default function AddSet({ id }) {
   const [isClicked, setIsClicked] = useState(false)
-  const [workout, setWorkout] = useState("")
+  const [reps, setReps] = useState("")
+  const [weight, setWeight] = useState("")
 
   const handleClick = (e) => {
     e.preventDefault()
@@ -21,32 +22,25 @@ export default function AddSet({ id }) {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (!set) {
-      alert("Please add a valid workout")
-      return
-    }
-
+    console.log(reps, weight, id)
     try {
-      const response = await fetch(`/api/add-set/${id}`, {
+      const response = await fetch(`/api/add-set`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          name: workout,
-          routineId: routineId,
-        }),
+        body: JSON.stringify({ weight, reps, workoutId: id }),
       })
 
       if (!response.ok) {
-        throw new Error("Your reached the try error clause")
+        const error = await response.json()
+        console.log("Error: ", error)
       }
-      setWorkout("")
+      setReps("")
+      setWeight("")
       setIsClicked(false)
-      onAdd()
+      //   onAdd()
     } catch (error) {
-      console.log(error)
-
       alert("Error submitting, you reached the catch clause")
     }
   }
@@ -55,7 +49,7 @@ export default function AddSet({ id }) {
       <div className="mb-safe fixed inset-x-0 bottom-0 flex justify-center gap-x-4 px-4 py-2 shadow-lg">
         <button
           onClick={handleClick}
-          aria-label="add workout routine"
+          aria-label="add set"
           className="rounded-full bg-blue-600 px-4 py-4"
         >
           <IoAdd className="text-6xl text-black" />
@@ -86,50 +80,49 @@ export default function AddSet({ id }) {
           <div className="px-5">
             <label
               className="ml-2 block text-xs text-slate-200"
-              htmlFor="routine-name"
+              htmlFor="weight"
             >
-             Weight
+              Weight
             </label>
             <div className="mt-2">
               <input
-                value={workout}
-                onChange={(e) => setWorkout(e.target.value)}
-                id="routine-name"
-                name="routine-name"
+                value={weight}
+                onChange={(e) => setWeight(e.target.value)}
+                id="weight"
+                name="weight"
                 type="number"
                 placeholder="35..."
                 className="block w-full rounded-md bg-zinc-800 px-3 py-2 text-sm text-gray-300 placeholder:text-gray-400"
               />
               <p
-                id="routine-name-description"
+                id="weight-description"
                 className="ml-2 mt-2 text-sm text-gray-500"
               >
                 <span className="text-blue-600">Input</span> the lbs
               </p>
             </div>
           </div>
-          <div className="px-5 mt-4">
-            <label
-              className="ml-2 block text-xs text-slate-200"
-              htmlFor="routine-name"
-            >
+
+          <div className="mt-4 px-5">
+            <label className="ml-2 block text-xs text-slate-200" htmlFor="reps">
               Reps
             </label>
             <div className="mt-2">
               <input
-                value={workout}
-                onChange={(e) => setWorkout(e.target.value)}
-                id="routine-name"
-                name="routine-name"
+                value={reps}
+                onChange={(e) => setReps(e.target.value)}
+                id="reps"
+                name="reps"
                 type="number"
                 placeholder="8..."
                 className="block w-full rounded-md bg-zinc-800 px-3 py-2 text-sm text-gray-300 placeholder:text-gray-400"
               />
               <p
-                id="routine-name-description"
+                id="reps-description"
                 className="ml-2 mt-2 text-sm text-gray-500"
               >
-                <span className="text-blue-600">Input</span> the repetitions you did this set
+                <span className="text-blue-600">Input</span> the repetitions you
+                did this set
               </p>
             </div>
           </div>

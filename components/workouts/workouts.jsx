@@ -10,12 +10,9 @@ import AddWorkout from "./addWorkout"
 
 export default function Workouts({ id }) {
   const [workout, setWorkout] = useState(null)
+  const [refresh, setRefresh] = useState(false)
 
   useEffect(() => {
-    {
-      /*GET ALL ROUTINES*/
-    }
-
     const fetchRoutine = async () => {
       try {
         const response = await fetch(`/api/get-workouts/${id}`)
@@ -27,10 +24,7 @@ export default function Workouts({ id }) {
       }
     }
     fetchRoutine()
-  }, [id])
-  {
-    /*DELETE A ROUTINE*/
-  }
+  }, [id, refresh])
 
   const handleDelete = async (workoutId) => {
     try {
@@ -41,8 +35,8 @@ export default function Workouts({ id }) {
         },
         body: JSON.stringify({ workoutId }),
       })
-      const data = await response.json
-      console.log("Deleted workout", data)
+      if (!response.ok) throw new Error("Failed to delete workout")
+      setRefresh((prev) => !prev)
     } catch (error) {
       console.log("Cannot delete this workout", error)
     }
@@ -59,7 +53,7 @@ export default function Workouts({ id }) {
         role="list"
         className="divide-y divide-neutral-800 overflow-hidden rounded-xl bg-zinc-900"
       >
-        <AddWorkout routineId={id} />
+        <AddWorkout routineId={id} onAdd={() => setRefresh((prev) => !prev)} />
         {workout.workouts.map((thisWorkout) => (
           <SwipeToDelete
             key={thisWorkout.id}

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 import { IoAdd } from "react-icons/io5"
 import { IoIosList } from "react-icons/io"
 
-export default function AddWorkout({ routineId }) {
+export default function AddWorkout({ routineId, onAdd }) {
   const [isClicked, setIsClicked] = useState(false)
   const [workout, setWorkout] = useState("")
 
@@ -43,6 +43,7 @@ export default function AddWorkout({ routineId }) {
       }
       setWorkout("")
       setIsClicked(false)
+      onAdd()
     } catch (error) {
       console.log(error)
 

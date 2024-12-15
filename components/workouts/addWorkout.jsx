@@ -5,12 +5,9 @@ import { useEffect, useState } from "react"
 import { IoAdd } from "react-icons/io5"
 import { IoIosList } from "react-icons/io"
 
-export default function AddRoutine({ addRoutine }) {
-  {
-    /*BUTTON STATES*/
-  }
-
+export default function AddWorkout({ routineId }) {
   const [isClicked, setIsClicked] = useState(false)
+  const [workout, setWorkout] = useState("")
 
   const handleClick = (e) => {
     e.preventDefault()
@@ -21,53 +18,44 @@ export default function AddRoutine({ addRoutine }) {
     setIsClicked(false)
   }
 
-  {
-    /*BACKEND ADDITION */
-  }
-  const [category, setCategory] = useState("")
-  const [description, setDescription] = useState("")
-
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (!category) {
-      alert("Please add a name for your routine before adding")
+    if (!workout) {
+      alert("Please add a valid workout")
       return
     }
 
     try {
-      const response = await fetch("/api/routines", {
+      const response = await fetch(`/api/add-workout`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          category,
-          description,
+          name: workout,
+          routineId: routineId,
         }),
       })
 
       if (!response.ok) {
-        throw new Error("Failed, you reached throw new error")
+        throw new Error("Your reached the try error clause")
       }
-      const newRoutine = await response.json()
-      setCategory("")
-      setDescription("")
+      setWorkout("")
       setIsClicked(false)
-      addRoutine(newRoutine)
     } catch (error) {
       console.log(error)
+
       alert("Error submitting, you reached the catch clause")
     }
   }
-
   return (
     <>
       <div className="relative flex gap-x-4 px-4 py-2">
         <button onClick={handleClick} aria-label="add workout routine">
           <IoAdd className="text-3xl text-blue-600" />
         </button>
-        <h2 className="text-blue-600">Add New Routine</h2>
+        <h2 className="text-blue-600">Add Workout</h2>
       </div>
 
       {/*POPUP*/}
@@ -97,12 +85,12 @@ export default function AddRoutine({ addRoutine }) {
               className="ml-2 block text-xs text-slate-200"
               htmlFor="routine-name"
             >
-              ROUTINE
+              Workout
             </label>
             <div className="mt-2">
               <input
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
+                value={workout}
+                onChange={(e) => setWorkout(e.target.value)}
                 id="routine-name"
                 name="routine-name"
                 type="text"
@@ -119,26 +107,6 @@ export default function AddRoutine({ addRoutine }) {
             </div>
           </div>
           {/*DESCRIPTION*/}
-
-          <div className="mt-8 px-5">
-            <label
-              className="ml-2 block text-xs text-slate-200"
-              htmlFor="routine-description"
-            >
-              DESCRIPTION
-            </label>
-            <div className="mt-2">
-              <input
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                id="routine-description"
-                name="routine-description"
-                type="text"
-                placeholder="Set a description"
-                className="block w-full rounded-md bg-zinc-800 px-3 py-2 text-sm text-gray-300 placeholder:text-gray-400"
-              />
-            </div>
-          </div>
         </div>
       </div>
     </>

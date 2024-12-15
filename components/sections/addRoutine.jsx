@@ -6,10 +6,6 @@ import { IoAdd } from "react-icons/io5"
 import { IoIosList } from "react-icons/io"
 
 export default function AddRoutine({ addRoutine }) {
-  {
-    /*BUTTON STATES*/
-  }
-
   const [isClicked, setIsClicked] = useState(false)
 
   const handleClick = (e) => {
@@ -21,9 +17,6 @@ export default function AddRoutine({ addRoutine }) {
     setIsClicked(false)
   }
 
-  {
-    /*BACKEND ADDITION */
-  }
   const [category, setCategory] = useState("")
   const [description, setDescription] = useState("")
 

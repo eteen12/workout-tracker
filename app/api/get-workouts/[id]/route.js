@@ -1,7 +1,7 @@
 import prisma from "../../../../lib/prisma"
 
 export async function GET(req, { params }) {
-  const { id } = params
+  const { id } = await params
 
   try {
     const routine = await prisma.routine.findUnique({

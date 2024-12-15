@@ -1,12 +1,12 @@
 "use client"
+import { useState, useEffect } from "react"
+import Link from "next/link"
+import SwipeToDelete from "react-swipe-to-delete-component"
+import "react-swipe-to-delete-component/dist/swipe-to-delete.css"
 
 import { ChevronRightIcon } from "@heroicons/react/20/solid"
 import { IoIosList } from "react-icons/io"
-import SwipeToDelete from "react-swipe-to-delete-component"
-import "react-swipe-to-delete-component/dist/swipe-to-delete.css"
-import Link from "next/link"
-
-import { useState, useEffect } from "react"
+import AddWorkout from "./addWorkout"
 
 export default function Workouts({ id }) {
   const [workout, setWorkout] = useState(null)
@@ -59,6 +59,7 @@ export default function Workouts({ id }) {
         role="list"
         className="divide-y divide-neutral-800 overflow-hidden rounded-xl bg-zinc-900"
       >
+        <AddWorkout routineId={id} />
         {workout.workouts.map((thisWorkout) => (
           <SwipeToDelete
             key={thisWorkout.id}

@@ -1,5 +1,3 @@
-"use client"
-
 import { ChevronRightIcon } from "@heroicons/react/20/solid"
 import { IoIosList } from "react-icons/io"
 import AddRoutine from "./addRoutine"

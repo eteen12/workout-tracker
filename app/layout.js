@@ -2,14 +2,6 @@ import Link from "next/link"
 
 import { Inter } from "next/font/google"
 import "./globals.css"
-import {
-  ClerkProvider,
-  SignIn,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -24,29 +16,19 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body className={`${inter.variable} antialiased`}>
-          <div className="h-20 w-full bg-zinc-900">
-            <header className="absolute left-0 top-7 ml-5 mr-auto opacity-100">
-              <div className="flex justify-between">
-                <UserButton />
-                <Link href="/">
-                  <p className="z-20 text-white">home</p>
-                </Link>
-              </div>
-            </header>
-          </div>
-          <div className="flex justify-center pt-16">
-            <SignedOut>
-              <SignIn routing="hash" />
-            </SignedOut>
-          </div>
-          <div className="px-5">
-            <SignedIn>{children}</SignedIn>
-          </div>
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en">
+      <body className={`${inter.variable} antialiased`}>
+        <div className="h-20 w-full bg-zinc-900">
+          <header className="absolute left-0 top-7 ml-5 mr-auto opacity-100">
+            <div className="flex justify-between">
+              <Link href="/">
+                <p className="z-20 text-white">home</p>
+              </Link>
+            </div>
+          </header>
+        </div>
+        <div className="px-5 pt-20">{children}</div>
+      </body>
+    </html>
   )
 }

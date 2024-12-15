@@ -16,7 +16,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className="overflow-hidden">
       <body className={`${inter.variable} antialiased`}>
         <div className="h-20 w-full bg-zinc-900">
           <header className="absolute left-0 top-7 ml-5 mr-auto opacity-100">

@@ -36,22 +36,22 @@ export default function DisplayWorkouts() {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col px-4 py-24">
       <div className="px-4">
         <h1 className="mb-1 text-lg text-slate-200">Workouts</h1>
       </div>
+      <AddWorkout refreshedWorkouts={refreshedWorkouts} />
       <ul
         role="list"
         className="divide-y divide-neutral-800 overflow-hidden rounded-xl bg-zinc-900"
       >
-        <AddWorkout refreshedWorkouts={refreshedWorkouts} />
         {workouts.map((workout) => (
           <SwipeToDelete
             key={workout.id}
             onDelete={() => handleDelete(workout.id)}
             classNameTag=""
           >
-            <Link href={`/sets/${workout.id}`}>
+            <Link href={`/set/${workout.id}`}>
               <li className="relative flex justify-between gap-x-6 bg-zinc-900 px-4 py-2">
                 <div className="flex min-w-0 gap-x-4">
                   <div className="min-w-0 flex-auto">

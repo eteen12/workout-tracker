@@ -36,7 +36,7 @@ export default function DisplayRoutines() {
   };
 
   return (
-    <div className="flex flex-col px-4">
+    <div className="flex flex-col px-4 py-24">
       <div className="px-4">
         <h1 className="mb-1 text-lg text-slate-200">Routines</h1>
       </div>
@@ -68,7 +68,7 @@ export default function DisplayRoutines() {
                 <div className="flex shrink-0 items-center gap-x-4">
                   <div className="flex">
                     <p className="text-sm text-gray-400">
-                      {routine.workoutCount || 0}
+                      {routine.workoutCount}
                     </p>
                     <ChevronRightIcon
                       aria-hidden="true"

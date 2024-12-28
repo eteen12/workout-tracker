@@ -1,18 +1,35 @@
 import { openWorkoutDb } from "./indexedDb";
 
-export const createSet = async (set) => {
+export const addSet = async (set) => {
   const db = await openWorkoutDb();
-  await db.add("sets", set);
+  const newSet = {
+    ...set,
+    date: set.date || new Date().toISOString(),
+  };
+  await db.add("sets", newSet);
 };
 
 export const getSets = async () => {
   const db = await openWorkoutDb();
-  return await db.getAll("sets");
+  const sets = await db.getAll("sets");
+
+  return sets.map((set) => ({
+    ...set,
+    date: new Date(set.date),
+  }));
 };
 
 export const updateSet = async (id, updateSet) => {
   const db = await openWorkoutDb();
-  await db.put("sets", { ...updateSet, id });
+  const existingSet = await db.get("sets", id);
+
+  const updatedSet = {
+    ...existingSet,
+    ...updateSet,
+    date: updateSet.date || existingSet.date,
+  };
+
+  await db.put("sets", updatedSet);
 };
 
 export const deleteSet = async (id) => {

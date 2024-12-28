@@ -5,6 +5,8 @@ export default {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./routines/**/*.{js,ts,jsx,tsx,mdx}",
+    "./sets/**/*.{js,ts,jsx,tsx,mdx}",
+    "./workouts/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {

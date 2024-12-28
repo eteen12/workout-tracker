@@ -19,3 +19,4 @@ export const deleteWorkout = async (id) => {
   const db = await openWorkoutDb();
   await db.delete("workouts", id);
 };
+

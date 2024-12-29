@@ -36,11 +36,9 @@ export default function DisplayWorkouts({ routineId }) {
   };
 
   return (
-    <div className="flex flex-col px-4">
+    <div className="flex flex-col px-4 py-24">
       <div className="px-4">
-        <h1 className="mb-1 text-lg text-slate-200">
-          Workouts for {routineId}
-        </h1>
+        <h1 className="mb-1 text-lg text-slate-200">Workouts</h1>
       </div>
       <AddWorkout refreshedWorkouts={refreshedWorkouts} routineId={routineId} />
       <ul
@@ -78,11 +76,8 @@ export default function DisplayWorkouts({ routineId }) {
         ))}
       </ul>
       {workouts.length <= 0 && (
-        <p
-          id="routine-name-description"
-          className="ml-4 mt-2 text-sm text-gray-500"
-        >
-          <span className="text-blue-600">Add your</span> first routine here
+        <p className="ml-4 mt-2 text-sm text-gray-500">
+          <span className="text-blue-600">Add your</span> first workout here
         </p>
       )}
     </div>

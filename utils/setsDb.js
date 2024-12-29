@@ -5,14 +5,16 @@ export const addSet = async (set) => {
   const newSet = {
     ...set,
     date: set.date || new Date().toISOString(),
-    workoutId,
   };
   await db.add("sets", newSet);
 };
 
-export const getSets = async () => {
+export const getSets = async (workoutId) => {
   const db = await openWorkoutDb();
-  const sets = await db.getAll("sets");
+  const tx = db.transaction("sets", "readonly");
+  const store = tx.objectStore("sets");
+  const index = store.index("by_workout");
+  const sets = await index.getAll(workoutId);
 
   return sets.map((set) => ({
     ...set,

@@ -11,12 +11,12 @@ import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import { IoIosList } from "react-icons/io";
 import AddSet from "./editSets";
 
-export default function DisplaySets() {
+export default function DisplaySets({ workoutId }) {
   const [sets, setSets] = useState([]);
 
   useEffect(() => {
     const fetchSets = async () => {
-      const fetchedSets = await getSets();
+      const fetchedSets = await getSets(workoutId);
       console.log("Fetched sets:", fetchedSets);
       setSets(fetchedSets);
     };
@@ -24,7 +24,7 @@ export default function DisplaySets() {
   }, []);
 
   const refreshedSets = async () => {
-    const fetchedSets = await getSets();
+    const fetchedSets = await getSets(workoutId);
     setSets(fetchedSets);
   };
 
@@ -53,7 +53,7 @@ export default function DisplaySets() {
     <>
       <div className="flex flex-col px-4 py-24">
         <div className="px-4">
-          <h1 className="mb-1 text-lg text-slate-200">Sets</h1>
+          <h1 className="mb-1 text-lg text-slate-200">Sets for {workoutId}</h1>
         </div>
         {Object.entries(groupedSets).map(([date, sets]) => (
           <div key={date} className="w-full">
@@ -105,7 +105,7 @@ export default function DisplaySets() {
             </ul>
           </div>
         ))}
-        <AddSet refreshedSets={refreshedSets} />
+        <AddSet refreshedSets={refreshedSets} workoutId={workoutId} />
       </div>
     </>
   );

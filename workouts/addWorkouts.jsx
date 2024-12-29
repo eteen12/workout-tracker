@@ -6,9 +6,9 @@ import { addWorkout } from "@/utils/workoutsDb";
 import { IoAdd } from "react-icons/io5";
 import { IoIosList } from "react-icons/io";
 
-export default function AddWorkout({ refreshedWorkouts }) {
+export default function AddWorkout({ refreshedWorkouts, routineId }) {
   const [isClicked, setIsClicked] = useState(false);
-  const [workout, setWorkout] = useState({ name: "" });
+  const [workout, setWorkout] = useState({ name: "", routineId: routineId });
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -23,7 +23,7 @@ export default function AddWorkout({ refreshedWorkouts }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await addWorkout(workout);
-    setWorkout({ name: "" });
+    setWorkout({ name: "", routineId: routineId });
     setIsClicked(false);
     refreshedWorkouts();
   };

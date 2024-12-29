@@ -5,6 +5,7 @@ export const addSet = async (set) => {
   const newSet = {
     ...set,
     date: set.date || new Date().toISOString(),
+    workoutId,
   };
   await db.add("sets", newSet);
 };

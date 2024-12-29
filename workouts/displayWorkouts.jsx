@@ -10,19 +10,19 @@ import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import { IoIosList } from "react-icons/io";
 import AddWorkout from "./addWorkouts";
 
-export default function DisplayWorkouts() {
+export default function DisplayWorkouts({ routineId }) {
   const [workouts, setWorkouts] = useState([]);
 
   useEffect(() => {
     const fetchWorkouts = async () => {
-      const fetchedWorkouts = await getWorkouts();
+      const fetchedWorkouts = await getWorkouts(routineId);
       setWorkouts(fetchedWorkouts);
     };
     fetchWorkouts();
   }, []);
 
   const refreshedWorkouts = async () => {
-    const fetchedWorkouts = await getWorkouts();
+    const fetchedWorkouts = await getWorkouts(routineId);
     setWorkouts(fetchedWorkouts);
   };
 
@@ -36,11 +36,13 @@ export default function DisplayWorkouts() {
   };
 
   return (
-    <div className="flex flex-col px-4 py-24">
+    <div className="flex flex-col px-4">
       <div className="px-4">
-        <h1 className="mb-1 text-lg text-slate-200">Workouts</h1>
+        <h1 className="mb-1 text-lg text-slate-200">
+          Workouts for {routineId}
+        </h1>
       </div>
-      <AddWorkout refreshedWorkouts={refreshedWorkouts} />
+      <AddWorkout refreshedWorkouts={refreshedWorkouts} routineId={routineId} />
       <ul
         role="list"
         className="divide-y divide-neutral-800 overflow-hidden rounded-xl bg-zinc-900"

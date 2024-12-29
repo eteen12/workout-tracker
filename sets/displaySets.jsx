@@ -72,38 +72,33 @@ export default function DisplaySets() {
                     onDelete={() => handleDelete(set.id)}
                     classNameTag=""
                   >
-                    <Link href={`/sets/${set.id}`}>
-                      <div className="relative flex w-full justify-between gap-x-6 bg-zinc-900 px-4 py-2">
-                        <div className="flex justify-between gap-x-4">
-                          <p className="w-full text-sm/6 font-semibold text-slate-200">
-                            {set.reps} reps
+                    <div className="relative flex w-full justify-between gap-x-6 bg-zinc-900 px-4 py-2">
+                      <div className="flex justify-between gap-x-4">
+                        <p className="w-full text-sm/6 font-semibold text-slate-200">
+                          {set.reps} reps
+                        </p>
+                      </div>
+                      <div>
+                        <p className="w-full text-sm/6 font-semibold text-slate-200">
+                          {set.weight} lbs
+                        </p>
+                      </div>
+                      <div className="flex shrink-0 items-center gap-x-4">
+                        <div className="flex">
+                          <p className="text-sm text-gray-400">
+                            {new Date(set.date).toLocaleTimeString(undefined, {
+                              hour: "numeric",
+                              minute: "2-digit",
+                              hour12: true,
+                            })}
                           </p>
-                        </div>
-                        <div>
-                          <p className="w-full text-sm/6 font-semibold text-slate-200">
-                            {set.weight} lbs
-                          </p>
-                        </div>
-                        <div className="flex shrink-0 items-center gap-x-4">
-                          <div className="flex">
-                            <p className="text-sm text-gray-400">
-                              {new Date(set.date).toLocaleTimeString(
-                                undefined,
-                                {
-                                  hour: "numeric",
-                                  minute: "2-digit",
-                                  hour12: true,
-                                }
-                              )}
-                            </p>
-                            <ChevronRightIcon
-                              aria-hidden="true"
-                              className="size-5 flex-none text-gray-400"
-                            />
-                          </div>
+                          <ChevronRightIcon
+                            aria-hidden="true"
+                            className="size-5 flex-none text-gray-400"
+                          />
                         </div>
                       </div>
-                    </Link>
+                    </div>
                   </SwipeToDelete>
                 </li>
               ))}

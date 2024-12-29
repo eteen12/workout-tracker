@@ -53,7 +53,7 @@ export default function DisplaySets({ workoutId }) {
     <>
       <div className="flex flex-col px-4 py-24">
         <div className="px-4">
-          <h1 className="mb-1 text-lg text-slate-200">Sets for {workoutId}</h1>
+          <h1 className="mb-1 text-lg text-slate-200">Sets</h1>
         </div>
         {Object.entries(groupedSets).map(([date, sets]) => (
           <div key={date} className="w-full">

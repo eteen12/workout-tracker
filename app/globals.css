@@ -2,28 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  overflow: hidden;
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
 }
 
-:root {
-  --background: #000;
-  --foreground: #171717;
-  --font-inter: "Inter", sans-serif;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-inter);
-  font-weight: 300;
+  font-family: Arial, Helvetica, sans-serif;
 }
-.bg {
-  background-color: rgba(26, 28, 26, 0.9);
-}
+
 .transition3 {
   transition: all 0.3s ease-in-out;
 }
-.thisguy {
-  background-color: black;
+html {
+  overflow: hidden;
+}
+
+.navBg {
+  background-color: rgba(34, 34, 34, 0.5);
 }

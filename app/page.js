@@ -1,9 +1,10 @@
-import Hero from "../components/sections/Hero"
+import react from "react";
+import DisplayRoutines from "@/routines/displayDeleteRoutines";
 
 export default function Home() {
   return (
     <div>
-      <Hero />
+      <DisplayRoutines />
     </div>
-  )
+  );
 }

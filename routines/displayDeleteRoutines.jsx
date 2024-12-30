@@ -9,7 +9,6 @@ import "react-swipe-to-delete-component/dist/swipe-to-delete.css";
 
 import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import { IoIosList } from "react-icons/io";
-import WorkoutManager from "./button";
 
 export default function DisplayRoutines() {
   const [routines, setRoutines] = useState([]);
@@ -17,7 +16,6 @@ export default function DisplayRoutines() {
   useEffect(() => {
     const fetchRoutines = async () => {
       const fetchedRoutines = await getRoutines();
-      console.log("Fetched routines:", fetchedRoutines);
       setRoutines(fetchedRoutines);
     };
     fetchRoutines();
@@ -91,9 +89,7 @@ export default function DisplayRoutines() {
           <span className="text-blue-600">Add your</span> first routine here
         </p>
       )}
-      <div className="mt-20">
-        <WorkoutManager refreshedRoutines={refreshedRoutines} />
-      </div>
+      <div className="mt-20"></div>
     </div>
   );
 }

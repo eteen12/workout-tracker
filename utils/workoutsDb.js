@@ -21,4 +21,5 @@ export const updateWorkout = async (id, updateWorkout) => {
 export const deleteWorkout = async (id) => {
   const db = await openWorkoutDb();
   await db.delete("workouts", id);
+
 };

@@ -6,12 +6,12 @@ import { addSet } from "@/utils/setsDb";
 import { IoAdd } from "react-icons/io5";
 import { IoIosList } from "react-icons/io";
 
-export default function AddSet({ refreshedSets, workoutId }) {
+export default function AddSet({ refreshedSets, id }) {
   const [isClicked, setIsClicked] = useState(false);
   const [set, setSet] = useState({
     weight: "",
     reps: "",
-    workoutId: workoutId,
+    workoutId: id,
   });
 
   const handleClick = (e) => {
@@ -27,7 +27,7 @@ export default function AddSet({ refreshedSets, workoutId }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await addSet(set);
-    setSet({ weight: "", reps: "", workoutId: workoutId });
+    setSet({ weight: "", reps: "", workoutId: id });
     setIsClicked(false);
     refreshedSets();
   };

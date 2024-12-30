@@ -1,5 +1,6 @@
 import { openWorkoutDb } from "./indexedDb";
 
+
 export const addRoutine = async (routine) => {
   const db = await openWorkoutDb();
   await db.add("routines", routine);

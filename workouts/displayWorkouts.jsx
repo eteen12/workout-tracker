@@ -27,6 +27,7 @@ export default function DisplayWorkouts({ routineId }) {
   };
 
   const handleDelete = async (id) => {
+    console.log("Deleting sets for workout ID:", id);
     try {
       await deleteWorkout(id);
       refreshedWorkouts();

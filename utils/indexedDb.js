@@ -41,11 +41,11 @@ export const exportDataToJSON = async () => {
   const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
-  link.download = "workoutData.json";
+  link.download = "yourWorkoutData.json";
   link.click();
 };
 
-export const importDataFromJSON = async (file, refreshedRoutines) => {
+export const importDataFromJSON = async (file) => {
   const reader = new FileReader();
   reader.onload = async (event) => {
     const data = JSON.parse(event.target.result);
@@ -67,12 +67,9 @@ export const importDataFromJSON = async (file, refreshedRoutines) => {
         ...data.sets.map((set) => setsStore.put(set)),
       ]);
 
-      await tx.done; // Wait for the transaction to complete
+      await tx.done;
 
       console.log("Data imported successfully!");
-
-      // Refresh the routines after import
-      refreshedRoutines();
     } catch (error) {
       console.error("Error during import:", error);
     }

@@ -10,7 +10,7 @@ import {
 } from "react-icons/pi";
 
 import { IoIosList } from "react-icons/io";
-import { ChevronRightIcon } from "@heroicons/react/20/solid";
+import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/20/solid";
 
 const settings = [
   {
@@ -25,7 +25,7 @@ const settings = [
   },
 ];
 
-export default function NavBar() {
+export default function NavBar({ routineId, closeRoutine }) {
   const [clicked, setIsClicked] = useState(false);
 
   const handleClick = (e) => {
@@ -39,24 +39,38 @@ export default function NavBar() {
 
   return (
     <div className="w-full h-16 relative navBg z-50">
-      <div className="px-4 w-full h-full pt-4 flex justify-end">
-        {clicked ? (
-          <PiDotsThreeCircleFill
-            className="text-blue-600 text-3xl"
-            onClick={handleClose}
-          />
-        ) : (
-          <PiDotsThreeCircleLight
-            className="text-blue-600 text-3xl relative"
-            onClick={handleClick}
-          />
-        )}
+      <div className="flex justify-between px-4 w-full h-full pt-4">
+        <div className="flex pt-1">
+          {routineId ? (
+            <div className="text-blue-600 flex" onClick={closeRoutine}>
+              <ChevronLeftIcon className="size-5 flex-none " />{" "}
+              <span>Back</span>
+            </div>
+          ) : (
+            <div></div>
+          )}
+        </div>
+        <div className=" flex justify-end">
+          {clicked ? (
+            <PiDotsThreeCircleFill
+              className="text-blue-600 text-3xl"
+              onClick={handleClose}
+            />
+          ) : (
+            <PiDotsThreeCircleLight
+              className="text-blue-600 text-3xl relative"
+              onClick={handleClick}
+            />
+          )}
+        </div>
       </div>
 
       {/*Settings menu*/}
 
       <div
-        className={`transition3 bg-black h-screen z-0 fixed top-0 left-0 w-full mt-16 px-4 ${clicked ? "-translate-x-0 " : "translate-x-full"}`}
+        className={`transition3 bg-black h-screen z-0 fixed top-0 left-0 w-full mt-16 px-4 ${
+          clicked ? "-translate-x-0 " : "translate-x-full"
+        }`}
       >
         <ul
           role="list"

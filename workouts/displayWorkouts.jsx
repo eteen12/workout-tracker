@@ -45,7 +45,7 @@ export default function DisplayWorkouts({ routineId }) {
   };
 
   return (
-    <div className="flex flex-col px-4 py-24">
+    <div className="flex flex-col px-4 mt-24">
       <div className="px-4">
         <h1 className="mb-1 text-lg text-slate-200">Workouts</h1>
       </div>

@@ -9,9 +9,11 @@ import "react-swipe-to-delete-component/dist/swipe-to-delete.css";
 import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import { IoIosList } from "react-icons/io";
 import AddWorkout from "./addWorkouts";
+import DisplaySets from "@/sets/displaySets";
 
 export default function DisplayWorkouts({ routineId }) {
   const [workouts, setWorkouts] = useState([]);
+  const [id, setId] = useState(false);
 
   useEffect(() => {
     const fetchWorkouts = async () => {
@@ -36,6 +38,12 @@ export default function DisplayWorkouts({ routineId }) {
     }
   };
 
+  const handleClick = async (id, e) => {
+    e.preventDefault();
+    console.log(id);
+    setId(id);
+  };
+
   return (
     <div className="flex flex-col px-4 py-24">
       <div className="px-4">
@@ -52,27 +60,28 @@ export default function DisplayWorkouts({ routineId }) {
             onDelete={() => handleDelete(workout.id)}
             classNameTag=""
           >
-            <Link href={`/set/${workout.id}`}>
-              <li className="relative flex justify-between gap-x-6 bg-zinc-900 px-4 py-2">
-                <div className="flex min-w-0 gap-x-4">
-                  <div className="min-w-0 flex-auto">
-                    <p className="text-sm/6 font-semibold text-slate-200">
-                      <span className="absolute inset-x-0 -top-px bottom-0" />
-                      {workout.name}
-                    </p>
-                  </div>
+            <li
+              className="relative flex justify-between gap-x-6 bg-zinc-900 px-4 py-2"
+              onClick={(e) => handleClick(workout.id, e)}
+            >
+              <div className="flex min-w-0 gap-x-4">
+                <div className="min-w-0 flex-auto">
+                  <p className="text-sm/6 font-semibold text-slate-200">
+                    <span className="absolute inset-x-0 -top-px bottom-0" />
+                    {workout.name}
+                  </p>
                 </div>
-                <div className="flex shrink-0 items-center gap-x-4">
-                  <div className="flex">
-                    <p className="text-sm text-gray-400"></p>
-                    <ChevronRightIcon
-                      aria-hidden="true"
-                      className="size-5 flex-none text-gray-400"
-                    />
-                  </div>
+              </div>
+              <div className="flex shrink-0 items-center gap-x-4">
+                <div className="flex">
+                  <p className="text-sm text-gray-400"></p>
+                  <ChevronRightIcon
+                    aria-hidden="true"
+                    className="size-5 flex-none text-gray-400"
+                  />
                 </div>
-              </li>
-            </Link>
+              </div>
+            </li>
           </SwipeToDelete>
         ))}
       </ul>
@@ -80,6 +89,11 @@ export default function DisplayWorkouts({ routineId }) {
         <p className="ml-4 mt-2 text-sm text-gray-500">
           <span className="text-blue-600">Add your</span> first workout here
         </p>
+      )}
+      {id && (
+        <div className="absolute inset-0 z-20 bg-black">
+          <DisplaySets id={id} />
+        </div>
       )}
     </div>
   );

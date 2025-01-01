@@ -8,6 +8,8 @@ import { IoIosList } from "react-icons/io";
 
 export default function AddSet({ refreshedSets, id }) {
   const [isClicked, setIsClicked] = useState(false);
+  const [hidden, setIsHidden] = useState(true);
+
   const [set, setSet] = useState({
     weight: "",
     reps: "",
@@ -16,12 +18,20 @@ export default function AddSet({ refreshedSets, id }) {
 
   const handleClick = (e) => {
     e.preventDefault();
-    setIsClicked(true);
+    setIsHidden(false);
+
+    setTimeout(() => {
+      setIsClicked(true);
+    });
   };
 
   const handleClose = (e) => {
     e.preventDefault();
     setIsClicked(false);
+
+    setTimeout(() => {
+      setIsHidden(true);
+    }, 300);
   };
 
   const handleSubmit = async (e) => {
@@ -29,6 +39,10 @@ export default function AddSet({ refreshedSets, id }) {
     await addSet(set);
     setSet({ weight: "", reps: "", workoutId: id });
     setIsClicked(false);
+
+    setTimeout(() => {
+      setIsHidden(true);
+    }, 300);
     refreshedSets();
   };
 
@@ -48,7 +62,7 @@ export default function AddSet({ refreshedSets, id }) {
       <div
         className={`transition3 absolute inset-0 z-20 h-full w-full transform ${
           isClicked ? "translate-y-0" : "translate-y-full"
-        }`}
+        } ${hidden ? "hidden" : "block"}`}
       >
         {/**/}
         <div className="relative mt-32 h-full w-full rounded-t-xl bg-zinc-900">

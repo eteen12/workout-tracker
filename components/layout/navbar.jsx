@@ -38,12 +38,12 @@ export default function NavBar({ routineId, closeRoutine }) {
   };
 
   return (
-    <div className="w-full h-16 relative navBg z-50">
+    <div className="w-full h-16 navBg z-50 sticky">
       <div className="flex justify-between px-4 w-full h-full pt-4">
         <div className="flex pt-1">
           {routineId ? (
             <div className="text-blue-600 flex" onClick={closeRoutine}>
-              <ChevronLeftIcon className="size-5 flex-none " />{" "}
+              <ChevronLeftIcon className="size-5 flex-none mt-px" />{" "}
               <span>Back</span>
             </div>
           ) : (

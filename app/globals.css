@@ -23,9 +23,6 @@ body {
 .transition3 {
   transition: all 0.3s ease-in-out;
 }
-html {
-  overflow: hidden;
-}
 
 .navBg {
   background-color: rgba(34, 34, 34, 0.5);

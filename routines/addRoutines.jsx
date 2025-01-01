@@ -6,18 +6,27 @@ import { addRoutine } from "@/utils/routinesDb";
 import { IoAdd } from "react-icons/io5";
 import { IoIosList } from "react-icons/io";
 
-const AddRoutine = ({refreshedRoutines}) => {
+const AddRoutine = ({ refreshedRoutines }) => {
   const [isClicked, setIsClicked] = useState(false);
   const [routine, setRoutine] = useState({ category: "", description: "" });
+  const [hidden, setIsHidden] = useState(true);
 
   const handleClick = (e) => {
     e.preventDefault();
-    setIsClicked(true);
+    setIsHidden(false);
+
+    setTimeout(() => {
+      setIsClicked(true);
+    }, 300);
   };
 
   const handleClose = (e) => {
     e.preventDefault();
     setIsClicked(false);
+
+    setTimeout(() => {
+      setIsHidden(true);
+    }, 300);
   };
 
   const handleSubmit = async (e) => {
@@ -25,6 +34,11 @@ const AddRoutine = ({refreshedRoutines}) => {
     await addRoutine(routine);
     setRoutine({ category: "", description: "" });
     setIsClicked(false);
+
+    setTimeout(() => {
+      setIsHidden(true);
+    }, 300);
+
     refreshedRoutines();
   };
 
@@ -42,7 +56,7 @@ const AddRoutine = ({refreshedRoutines}) => {
       <div
         className={`transition3 absolute inset-0 z-20 h-full w-full transform ${
           isClicked ? "translate-y-0" : "translate-y-full"
-        }`}
+        } ${hidden ? "hidden" : "block"}`}
       >
         <div className="relative mt-32 h-full w-full rounded-t-xl bg-zinc-900">
           {/*ADD AND CLOSE BUTTONS*/}
@@ -68,7 +82,9 @@ const AddRoutine = ({refreshedRoutines}) => {
             <div className="mt-2">
               <input
                 value={routine.category}
-                onChange={(e) => setRoutine({...routine, category: e.target.value})}
+                onChange={(e) =>
+                  setRoutine({ ...routine, category: e.target.value })
+                }
                 id="routine-name"
                 name="routine-name"
                 type="text"
@@ -96,7 +112,9 @@ const AddRoutine = ({refreshedRoutines}) => {
             <div className="mt-2">
               <input
                 value={routine.description}
-                onChange={(e) => setRoutine({...routine, description: e.target.value})}
+                onChange={(e) =>
+                  setRoutine({ ...routine, description: e.target.value })
+                }
                 id="routine-description"
                 name="routine-description"
                 type="text"

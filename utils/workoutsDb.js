@@ -20,6 +20,26 @@ export const updateWorkout = async (id, updateWorkout) => {
 
 export const deleteWorkout = async (id) => {
   const db = await openWorkoutDb();
-  await db.delete("workouts", id);
+  // await db.delete("workouts", id);
+  const tx = db.transaction(["workouts", "sets"], "readwrite");
+  const workoutsStore = tx.objectStore("workouts");
+  const setsStore = tx.objectStore("sets");
 
+  try {
+    await workoutsStore.delete(id);
+
+    const index = setsStore.index("by_workout");
+    const setsToDelete = await index.getAllKeys(id);
+    for (const setId of setsToDelete) {
+      console.log("DELETING THIS MF:", setId);
+      await setsStore.delete(setId);
+    }
+
+    const setsAfterDelete = await setsStore.getAll();
+    console.log("Sets after deletion:", setsAfterDelete);
+  } catch (error) {
+    console.log("ERROR DELETING THE SET MATE:", error);
+  }
 };
+
+// indexedDB.deleteDatabase('WorkoutTrackerDB');

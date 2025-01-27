@@ -48,6 +48,10 @@ export default function DisplaySets({ id }) {
     return acc;
   }, {});
 
+  Object.keys(groupedSets).forEach((dateKey) => {
+    groupedSets[dateKey].sort((a, b) => new Date(b.date) - new Date(a.date));
+  });
+
   return (
     <>
       <div className="flex flex-col px-4 py-24">

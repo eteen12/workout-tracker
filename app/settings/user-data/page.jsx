@@ -36,7 +36,7 @@ export default function UserData() {
               className="flex cursor-pointer flex-col items-center justify-center gap-2 text-gray-600 hover:text-blue-600"
             >
               <PiFileArrowDown className="text-3xl text-gray-600" />
-              <span className="text-gray-600">Import File</span>
+              <span className="text-gray-600">Add file</span>
             </label>
           ) : (
             <div className="flex flex-col gap-2 justify-center items-center text-blue-600">
@@ -53,8 +53,13 @@ export default function UserData() {
           />
         </div>
         <p className="text-sm text-gray-500 pt-5">
-          <span className="text-blue-600">So whats this?</span> Pretty please,
-          read the{" "}
+          <Link
+            className="text-blue-600 underline"
+            href={"/user-guide/#data-management"}
+          >
+            So whats this?
+          </Link>{" "}
+          Pretty please, read the{" "}
           <Link href={"/user-guide"} className="text-blue-600 underline">
             user guide
           </Link>{" "}

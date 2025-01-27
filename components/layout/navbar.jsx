@@ -7,6 +7,7 @@ import {
   PiDotsThreeCircleFill,
   PiDatabase,
   PiHouse,
+  PiScroll,
 } from "react-icons/pi";
 
 import { IoIosList } from "react-icons/io";
@@ -17,6 +18,11 @@ const settings = [
     name: "Home",
     icon: PiHouse,
     link: "/",
+  },
+  {
+    name: "User guide",
+    icon: PiScroll,
+    link: "/user-guide",
   },
   {
     name: "Data management",

@@ -36,7 +36,11 @@ export default function DisplaySets({ id }) {
     }
   };
 
-  const groupedSets = sets.reduce((acc, set) => {
+  const sortedSets = [...sets].sort(
+    (a, b) => new Date(b.date) - new Date(a.date)
+  );
+
+  const groupedSets = sortedSets.reduce((acc, set) => {
     const dateKey = new Date(set.date).toLocaleDateString(undefined, {
       weekday: "short",
       day: "numeric",

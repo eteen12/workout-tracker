@@ -48,7 +48,7 @@ export default function AddSet({ refreshedSets, id }) {
 
   return (
     <>
-      <div className="mb-safe fixed inset-x-0 bottom-0 flex justify-center gap-x-4 px-4 py-2 shadow-lg">
+      <div className="mb-safe fixed inset-x-0 bottom-0 flex justify-center gap-x-4 px-4 py-2 shadow-lg z-50">
         <button
           onClick={handleClick}
           aria-label="add set"

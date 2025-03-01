@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 
-import { getWorkoutName } from "@/utils/setsDb";
+import { getWorkoutName, getSets } from "@/utils/setsDb";
 
 // components/WorkoutChart.js
 import { Line } from "react-chartjs-2";
@@ -26,24 +26,33 @@ ChartJS.register(
   PointElement
 );
 
-const WorkoutChart = ({ data, workoutId }) => {
+const WorkoutChart = ({ workoutId }) => {
   const [workoutName, setWorkoutName] = useState("");
+  const [setsData, setSetsData] = useState([]);
 
   useEffect(() => {
     const fetchWorkoutName = async () => {
       const name = await getWorkoutName(workoutId);
       setWorkoutName(name);
+
+      const sets = await getSets(workoutId);
+      setSetsData(sets);
     };
 
     fetchWorkoutName();
   }, [workoutId]);
   const chartData = {
-    labels: data.labels,
+    labels: setsData.map((set) =>
+      new Date(set.date).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+      })
+    ),
     datasets: [
       {
-        label: `${workoutName} Progress`,
-        data: data.weights, 
-        borderColor: "rgba(75, 192, 192, 1)",
+        label: `${workoutName} Progress Per Set`,
+        data: setsData.map((set) => set.weight),
+        borderColor: "rgb(37 99 235)",
         borderWidth: 2,
         fill: false,
         tension: 0.1,

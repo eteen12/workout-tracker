@@ -65,6 +65,23 @@ const WorkoutChartPerSet = ({ workoutId, refreshedSets }) => {
     scales: {
       y: {
         beginAtZero: true,
+        grid: {
+          color: "gray",
+        },
+        ticks: {
+          color: "white",
+        },
+        border: {
+          color: "gray",
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        labels: {
+          color: "white", 
+        },
+
       },
     },
   };

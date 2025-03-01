@@ -11,6 +11,7 @@ import {
   CategoryScale,
   LinearScale,
   PointElement,
+  Colors,
 } from "chart.js";
 
 ChartJS.register(
@@ -80,6 +81,22 @@ const WorkoutChartPerDay = ({ workoutId, refreshedSets }) => {
     scales: {
       y: {
         beginAtZero: true,
+        grid: {
+          color: "gray",
+        },
+        ticks: {
+          color: "white",
+        },
+        border: {
+          color: "gray",
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        labels: {
+          color: "white",
+        },
       },
     },
   };

@@ -3,7 +3,7 @@ import DisplayRoutines from "@/routines/displayDeleteRoutines";
 
 export default function Home() {
   return (
-    <div>
+    <div className="">
       <DisplayRoutines />
     </div>
   );

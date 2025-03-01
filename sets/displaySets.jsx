@@ -56,7 +56,7 @@ export default function DisplaySets({ id }) {
 
   return (
     <>
-      <div className="flex flex-col px-4 py-24">
+      <div className="flex flex-col px-4 py-24 bg-black">
         <div className="px-4">
           <h1 className="mb-1 text-lg text-slate-200">Sets</h1>
         </div>

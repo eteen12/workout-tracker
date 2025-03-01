@@ -109,7 +109,7 @@ export default function DisplayRoutines() {
         )}
         <div className="mt-20"></div>
         {routineId && (
-          <div className="absolute inset-0 z-20 top-16 ">
+          <div className="absolute inset-0 z-40 top-16 bgColor">
             <DisplayWorkouts routineId={routineId} />
           </div>
         )}

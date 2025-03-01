@@ -53,9 +53,9 @@ export default function AddSet({ refreshedSets, id }) {
         <button
           onClick={handleClick}
           aria-label="add set"
-          className="rounded-full bg-blue-600 px-4 py-4"
+          className="rounded-full bg-blue-600 px-3 py-3 hover:opacity-70 transition3 hover:scale-95"
         >
-          <IoAdd className="text-6xl text-black" />
+          <IoAdd className="text-5xl text-black" />
         </button>
       </div>
       {/*POPUP*/}

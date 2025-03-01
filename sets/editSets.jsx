@@ -44,6 +44,7 @@ export default function AddSet({ refreshedSets, id }) {
       setIsHidden(true);
     }, 300);
     refreshedSets();
+    refreshChart();
   };
 
   return (

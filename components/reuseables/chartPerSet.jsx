@@ -26,7 +26,7 @@ ChartJS.register(
   PointElement
 );
 
-const WorkoutChartPerSet = ({ workoutId }) => {
+const WorkoutChartPerSet = ({ workoutId, refreshedSets }) => {
   const [workoutName, setWorkoutName] = useState("");
   const [setsData, setSetsData] = useState([]);
 
@@ -40,7 +40,7 @@ const WorkoutChartPerSet = ({ workoutId }) => {
     };
 
     fetchWorkoutName();
-  }, [workoutId]);
+  }, [workoutId, refreshedSets]);
   const chartData = {
     labels: setsData.map((set) =>
       new Date(set.date).toLocaleDateString("en-US", {
@@ -55,7 +55,7 @@ const WorkoutChartPerSet = ({ workoutId }) => {
         borderColor: "rgb(37 99 235)",
         borderWidth: 2,
         fill: false,
-        tension: 0.1,
+        tension: 0.3,
       },
     ],
   };

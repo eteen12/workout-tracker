@@ -7,7 +7,7 @@ import "react-swipe-to-delete-component/dist/swipe-to-delete.css";
 
 import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import AddSet from "./editSets";
-import WorkoutChartPerSet from "@/components/reuseables/chartPerSet";
+import ChartSlider from "@/components/reuseables/swiper";
 
 export default function DisplaySets({ id }) {
   const [sets, setSets] = useState([]);
@@ -61,7 +61,7 @@ export default function DisplaySets({ id }) {
           <h1 className="mb-1 text-lg text-slate-200">Sets</h1>
         </div>
         <div className="py-10">
-          <WorkoutChartPerSet workoutId={id} />
+          <ChartSlider workoutId={id} refreshedSets={refreshedSets} />
         </div>
         {Object.entries(groupedSets).map(([date, sets]) => (
           <div key={date} className="w-full">

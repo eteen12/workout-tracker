@@ -1,9 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-
 import { getWorkoutName, getSets } from "@/utils/setsDb";
-
-// components/WorkoutChart.js
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -26,32 +23,50 @@ ChartJS.register(
   PointElement
 );
 
-const WorkoutChart = ({ workoutId }) => {
+const WorkoutChartPerDay = ({ workoutId, refreshedSets }) => {
   const [workoutName, setWorkoutName] = useState("");
   const [setsData, setSetsData] = useState([]);
 
   useEffect(() => {
-    const fetchWorkoutName = async () => {
+    const fetchWorkoutData = async () => {
       const name = await getWorkoutName(workoutId);
       setWorkoutName(name);
 
       const sets = await getSets(workoutId);
-      setSetsData(sets);
+
+      const groupedData = sets.reduce((acc, set) => {
+        const dateKey = new Date(set.date).toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+        });
+
+        if (!acc[dateKey]) {
+          acc[dateKey] = { totalWeight: 0, count: 0 };
+        }
+
+        acc[dateKey].totalWeight += Number(set.weight);
+        acc[dateKey].count += 1;
+
+        return acc;
+      }, {});
+
+      const averagedSets = Object.keys(groupedData).map((date) => ({
+        date,
+        avgWeight: groupedData[date].totalWeight / groupedData[date].count,
+      }));
+
+      setSetsData(averagedSets);
     };
 
-    fetchWorkoutName();
-  }, [workoutId]);
+    fetchWorkoutData();
+  }, [workoutId, refreshedSets]);
+
   const chartData = {
-    labels: setsData.map((set) =>
-      new Date(set.date).toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-      })
-    ),
+    labels: setsData.map((set) => set.date),
     datasets: [
       {
-        label: `${workoutName} Progress Per Set`,
-        data: setsData.map((set) => set.weight),
+        label: `${workoutName} Progress (Avg per Day)`,
+        data: setsData.map((set) => set.avgWeight),
         borderColor: "rgb(37 99 235)",
         borderWidth: 2,
         fill: false,
@@ -72,4 +87,4 @@ const WorkoutChart = ({ workoutId }) => {
   return <Line data={chartData} options={chartOptions} />;
 };
 
-export default WorkoutChart;
+export default WorkoutChartPerDay;

@@ -61,7 +61,7 @@ export default function DisplayWorkouts({ routineId }) {
             classNameTag=""
           >
             <li
-              className="relative flex justify-between gap-x-6 bg-zinc-900 px-4 py-2"
+              className="relative flex justify-between gap-x-6 bg-zinc-900 px-4 py-2.5"
               onClick={(e) => handleClick(workout.id, e)}
             >
               <div className="flex min-w-0 gap-x-4">

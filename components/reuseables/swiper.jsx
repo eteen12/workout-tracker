@@ -37,7 +37,7 @@ const ChartSlider = ({ workoutId, refreshedSets }) => {
       >
         {charts.map((ChartComponent, index) => (
           <SwiperSlide key={index}>
-            <div className="py-12">
+            <div className="py-10 px-3  bg-zinc-900 rounded-xl">
               <ChartComponent
                 workoutId={workoutId}
                 refreshedSets={refreshedSets}

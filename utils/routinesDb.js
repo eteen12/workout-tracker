@@ -26,15 +26,14 @@ export const deleteRoutine = async (id) => {
 
   try {
     await routinesStore.delete(id);
-    console.log(`THIS FUCKING ROUTINE IS DELETED: ${id}`);
     const index = workoutsStore.index("by_routine");
     const workoutsToDelete = await index.getAllKeys(id);
 
     for (const workoutId of workoutsToDelete) {
-      console.log("Guess whos deleting the fucking workout", workoutId);
+      console.log("deleting this one", workoutId);
       await deleteWorkout(workoutId);
     }
   } catch (error) {
-    console.log("Routines calls the fucking error", error);
+    console.log("error from delete routines", error);
   }
 };

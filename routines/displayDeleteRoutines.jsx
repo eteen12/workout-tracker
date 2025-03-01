@@ -41,7 +41,7 @@ export default function DisplayRoutines() {
 
   const handleClick = async (id, e) => {
     e.preventDefault();
-    console.log(id);
+
     setRoutineId(id);
   };
 
@@ -51,7 +51,6 @@ export default function DisplayRoutines() {
 
   return (
     <>
-    
       <NavBar routineId={routineId} closeRoutine={closeRoutine} />
       <div className="flex flex-col px-4 py-24">
         <div className="px-4">

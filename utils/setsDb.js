@@ -24,6 +24,20 @@ export const getSets = async (workoutId) => {
   }));
 };
 
+export const getWorkoutName = async (workoutId) => {
+  console.log("Fetching workout name...");
+  const db = await openWorkoutDb();
+  const tx = db.transaction("workouts", "readonly");
+  const store = tx.objectStore("workouts");
+  const workout = await store.get(workoutId);
+  if (workout) {
+    return workout.name;
+  } else {
+    console.log(`No workout found with ID: ${workoutId}`);
+    return null;
+  }
+};
+
 export const updateSet = async (id, updateSet) => {
   const db = await openWorkoutDb();
   const existingSet = await db.get("sets", id);

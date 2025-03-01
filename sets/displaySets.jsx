@@ -1,15 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
-import Link from "next/link";
-
 import { getSets, deleteSet } from "@/utils/setsDb";
 
 import SwipeToDelete from "react-swipe-to-delete-component";
 import "react-swipe-to-delete-component/dist/swipe-to-delete.css";
 
 import { ChevronRightIcon } from "@heroicons/react/20/solid";
-import { IoIosList } from "react-icons/io";
 import AddSet from "./editSets";
+import WorkoutChart from "@/components/reuseables/chart";
 
 export default function DisplaySets({ id }) {
   const [sets, setSets] = useState([]);
@@ -62,6 +60,7 @@ export default function DisplaySets({ id }) {
         <div className="px-4">
           <h1 className="mb-1 text-lg text-slate-200">Sets</h1>
         </div>
+        <WorkoutChart data={sets} workoutId={id} />
         {Object.entries(groupedSets).map(([date, sets]) => (
           <div key={date} className="w-full">
             {/* Date Header */}

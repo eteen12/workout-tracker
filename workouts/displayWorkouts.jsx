@@ -40,7 +40,7 @@ export default function DisplayWorkouts({ routineId }) {
 
   const handleClick = async (id, e) => {
     e.preventDefault();
-    console.log(id);
+
     setId(id);
   };
 
